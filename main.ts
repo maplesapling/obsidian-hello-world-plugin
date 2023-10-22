@@ -5,8 +5,8 @@ export default class HelloWorldPlugin extends Plugin {
         this.addCommand({
             id: 'get-selected-text',
             name: 'Get selected text',
-            // Reference: https://docs.obsidian.md/Plugins/Editor/Editor
-            editorCallback: (editor: Editor) => this.getSelectedText(editor),
+            // Editor callback reference: https://docs.obsidian.md/Plugins/Editor/Editor
+            editorCallback: (editor: Editor) => this.boldSelectedText(editor),
             hotkeys: [
                 {
                     modifiers: ["Mod", "Shift"],
@@ -18,9 +18,14 @@ export default class HelloWorldPlugin extends Plugin {
         console.log('Hello world');
     }
 
-    async getSelectedText(editor) {
-        let selection = editor.getSelection();
+    async boldSelectedText(editor) {
+        // Simple replace text reference: https://docs.obsidian.md/Plugins/Editor/Editor
+        let original = editor.getSelection();
 
-        console.log(`Selected text:\n${selection}`);
+        let bolded = `**${original}**`;
+
+        editor.replaceSelection(bolded);
+
+        console.log(`Selected text:\n${original}\nNew text:\n${bolded}`);
     }
 }

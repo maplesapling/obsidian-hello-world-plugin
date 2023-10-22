@@ -1,11 +1,12 @@
-import { MarkdownView, Plugin } from 'obsidian';
+import { Editor, Plugin } from 'obsidian';
 
 export default class HelloWorldPlugin extends Plugin {
     async onload() {
         this.addCommand({
             id: 'get-selected-text',
             name: 'Get selected text',
-            callback: () => this.getSelectedText(),
+            // Reference: https://docs.obsidian.md/Plugins/Editor/Editor
+            editorCallback: (editor: Editor) => this.getSelectedText(editor),
             hotkeys: [
                 {
                     modifiers: ["Mod", "Shift"],
@@ -17,11 +18,7 @@ export default class HelloWorldPlugin extends Plugin {
         console.log('Hello world');
     }
 
-    async getSelectedText() {
-        let view = this.app.workspace.getActiveViewOfType(MarkdownView);
-
-        let editor = view.editor;
-
+    async getSelectedText(editor) {
         let selection = editor.getSelection();
 
         console.log(`Selected text:\n${selection}`);

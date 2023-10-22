@@ -14,10 +14,10 @@ export default class HelloWorldPlugin extends Plugin {
 			]
 		});
 
-		this.addStatusBarItem().setText('Hello world');
+		console.log('Hello world');
 	}
 
 	async getSelectedText() {
-		this.addStatusBarItem().setText('Get selected text');
+		console.log('Get selected text');
 	}
 }
